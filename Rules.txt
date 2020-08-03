@@ -1,0 +1,108 @@
+// GPIO's
+//  2 = -LED
+// 12 = FWD
+// 13 = IN
+// 14 = REV
+// 15 = OUT
+
+On System#Boot Do
+  TaskValueSet,4,1,60
+  TaskValueSet,4,2,0  // Auto lock disabled
+  Let,1,0             // Stopped=0/Unlocking=1/Locking=2
+  TimerSet,1,1
+  TimerSet,2,0
+  Event,Lock=1        // Lock at startup
+EndOn
+
+On MQTT#Connected Do
+  Publish,esp-nodes/%sysname%/ip,%ip%
+  Publish,esp-nodes/%sysname%/function, "Rothult lock"
+  Event Lock=1
+EndOn
+
+On Lock Do
+  If %eventvalue%=0
+    //0=Unlock
+    If [BoltIn#State]=0
+      gpio,12,0
+      gpio,14,1
+      gpio,2,0
+      Let,1,1
+      TimerSet,1,1
+    EndIf
+    TimerSet,2,[Config#AutoLockTime]
+    Publish,esp-nodes/%sysname%/lockstate,OFF
+  Else
+    //1=Lock
+    If [BoltOut#State]=0
+      gpio,14,0
+      gpio,12,1
+      gpio,2,0
+      Let,1,2
+      TimerSet,1,1
+    EndIf
+    Publish,esp-nodes/%sysname%/lockstate,ON
+  EndIf
+EndOn
+
+On BoltIn#State=1 Do
+  If [VAR#1]=1
+    TimerSet,1,0
+    gpio,14,0
+    gpio,12,1
+    Delay,[Config#RevTime]
+    gpio,12,0
+    Let,1,0
+    gpio,2,1
+  Endif
+  Publish,esp-nodes/%sysname%/boltstate,OFF
+EndOn
+
+On BoltOut#State=1 Do
+  If [VAR#1]=2
+    TimerSet,1,0
+    gpio,12,0
+    gpio,14,1
+    Delay,[Config#RevTime]
+    gpio,14,0
+    Let,1,0
+    gpio,2,1
+  Endif
+  Publish,esp-nodes/%sysname%/boltstate,ON
+EndOn
+
+On Step Do
+  If %eventvalue%=0
+    gpio,12,0
+    gpio,14,1
+  Else
+    gpio,14,0
+    gpio,12,1
+  EndIf
+  Delay,30
+  gpio,14,0
+  gpio,12,0
+EndOn
+
+On Rules#Timer=1 Do
+  gpio,14,0
+  gpio,12,0
+  gpio,2,1
+  Let,1,0
+EndOn
+
+On Rules#Timer=2 Do
+  Event,Lock=1
+EndOn
+
+On Cfg1 Do
+  If %eventvalue%<200
+    TaskValueSet,4,1,%eventvalue%
+  EndIf
+EndOn
+
+On Cfg2 Do
+  If %eventvalue%>3
+    TaskValueSet,4,2,%eventvalue%
+  EndIf
+EndOn
