@@ -8,7 +8,7 @@ This guide shows how to patch it up with an ESP8266 (Wemos D1 mini) to control i
 
 The function of the NFC locking will work in parallel, so you can use that as backup. 
 If that's not wanted, then you can disable the NFC function. 
-There is however a good reason to disable NFC when running on mains power, and that is because the onboard controller unlocks the lock on power up. It's therefore possible to pull open the locked compartment for a short moment when power is applied.  
+There is actually a good reason to disable NFC when running on mains power, and that is because the onboard controller unlocks the lock on power up. It's therefore possible to pull open the locked compartment for a short moment when power is applied.  
 
 The onboard controller will not recognize when we manipulate the motor, but our code will follow/sync with the onboard controller and also report back when it lock/unlock.
 
@@ -69,7 +69,7 @@ My version of ESPeasy when writing this is ESPeasy_mega-20200801 (image file: 'E
 You will also need an MQTT broker set up somewhere on your network that you can connect to, and I won't cover that either.
 
 I recommend that you use my settings and topic names etc as much as possible to minimize possible errors during first tests. You can modify to your liking later.
-Change only the IP and credentials needed to work with your broker, and name the ESP 'ESP8266-11-D1'. Be extremly careful on spelling topics etc exactly correct.
+Change only the IP and credentials needed to work with your broker, and name the ESP to 'ESP8266-11-D1'. Be meticulous on spelling names, topics etc exactly correct.
 
 **MQTT controller setup**
 
@@ -158,7 +158,7 @@ Therefore it could be beneficial with a battery backup.
 A powerbank might be the first thing you think of, but they are generally not useable for this.  
 However, a backup should be fairly simple to arrange with only one or two diodes (prefeerable schottky) and a battery pack. 
 Three AA cells (alkaline or NiMH) or maybe even a single LiIon (e.g. 18650) should suffice, giving hours of backup time. 
-If using NiMH cells, then they can probable be charged in-circuit using a single resistor. 
+If using NiMH cells, then they can probably be charged in-circuit using a single resistor.  
 I haven't tried this yet, but it should work.
 
 Another good idea would be to have wires to the motor (M+/M-) pulled out to some accessible but hidden/unsuspicious place. 
