@@ -2,7 +2,7 @@
 
 **Hacking an IKEA Rothult NFC lock to be remotely controlled by a ESP8266 WiFi module (D1 mini)**
 
-IKEA Rothult is a fairly cheap (~200SEK/€20) smart NFC lock for drawers, cabinets etc, and provides a nice and simple mechanichal base for differnt type of projects with electrically controlled locks.
+IKEA Rothult is a fairly cheap (~200SEK/€20) smart NFC lock for drawers, cabinets etc, and provides a nice and simple mechanichal base for different type of projects with electrically controlled locks.
 
 This guide shows how to patch it up with an ESP8266 (Wemos D1 mini) to control it remotely over WiFi.
 
