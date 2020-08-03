@@ -1,4 +1,4 @@
-# ESPeasy-Rothult
+# Rothult-ESPeasy
 
 **Hacking an IKEA Rothult NFC lock to be remotely controlled by a ESP8266 WiFi module (D1 mini)**
 
