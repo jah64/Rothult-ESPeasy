@@ -47,7 +47,7 @@ some slack, and tuck it into the compartment while sliding it into place.
 
 The screw for the compartment can be removed if you like to simplify the assembly, and the compartment will still stay in place quite firmly, or you can use the screw without the C-clip.
 
-It's a good idea to remove the metal tab connectors between cells in the compartment to avoid short circuits, they can be pulled out with a pair of pliers or be covered by some tape.
+It's a good idea to remove the metal tab connectors between cells in the compartment to avoid short circuits, they can be pulled out with a pair of pliers or be covered with some tape.
 
 To supply power the lock you can e.g. use a cut USB cable and a phone charger. Drill a hole somewere and route the cable in. 
 Solder the red and black wires to +5V/GND (or B+/B-) as I've done in the pictures below.  
